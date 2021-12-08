@@ -1,6 +1,7 @@
 import sys
 from PyQt5 import QtWidgets
 import form_LRF
+from atm_transmission import AtmospTrans
 
 
 class LRF_App(QtWidgets.QMainWindow, form_LRF.Ui_MainWindow):
@@ -47,7 +48,10 @@ class LRF_App(QtWidgets.QMainWindow, form_LRF.Ui_MainWindow):
         """Запуск расчета"""
         # Создание словаря входных данных
         self.create_input_data()
-        print(self.input_data)
+        atm_trans = AtmospTrans(self.input_data, 30000)
+        k_atm_trans = atm_trans.calculation_transmission()
+        print(k_atm_trans)
+        self.label.setText(str(k_atm_trans))
 
 
 def main():
