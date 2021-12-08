@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>630</width>
-    <height>609</height>
+    <height>610</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -295,7 +295,7 @@
       <string>Тип цели:</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_aer_tgt">
+    <widget class="QRadioButton" name="radioButton_air_tgt">
      <property name="geometry">
       <rect>
        <x>120</x>
@@ -355,7 +355,7 @@
       <string>Площадь цели, м2</string>
      </property>
     </widget>
-    <widget class="QDoubleSpinBox" name="doubleSpinBox_ares_tgt">
+    <widget class="QDoubleSpinBox" name="doubleSpinBox_area_tgt">
      <property name="geometry">
       <rect>
        <x>210</x>
@@ -392,7 +392,7 @@
       <double>0.250000000000000</double>
      </property>
     </widget>
-    <widget class="QLabel" name="label_height_tgt">
+    <widget class="QLabel" name="label_H_tgt">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -411,7 +411,7 @@
       <string>Высота цели, м</string>
      </property>
     </widget>
-    <widget class="QSpinBox" name="spinBox_height_tgt">
+    <widget class="QSpinBox" name="spinBox_H_tgt">
      <property name="geometry">
       <rect>
        <x>210</x>
@@ -460,7 +460,7 @@
       <number>10</number>
      </property>
     </widget>
-    <widget class="QLabel" name="label_reflect_tgt">
+    <widget class="QLabel" name="label_r_tgt">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -494,7 +494,7 @@
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QDoubleSpinBox" name="doubleSpinBox_reflect_tgt">
+    <widget class="QDoubleSpinBox" name="doubleSpinBox_r_tgt">
      <property name="geometry">
       <rect>
        <x>210</x>
@@ -654,7 +654,7 @@
       <string>Диаметр вх.зрачка, мм</string>
      </property>
     </widget>
-    <widget class="QDoubleSpinBox" name="doubleSpinBox">
+    <widget class="QDoubleSpinBox" name="doubleSpinBox_D_pld">
      <property name="geometry">
       <rect>
        <x>210</x>
@@ -679,7 +679,7 @@
       <double>100.000000000000000</double>
      </property>
     </widget>
-    <widget class="QLabel" name="label_height_pld">
+    <widget class="QLabel" name="label_H_pld">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -698,7 +698,7 @@
       <string>Высота ПЛД, м</string>
      </property>
     </widget>
-    <widget class="QSpinBox" name="spinBox_height_pld">
+    <widget class="QSpinBox" name="spinBox_H_pld">
      <property name="geometry">
       <rect>
        <x>210</x>
