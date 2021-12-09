@@ -26,7 +26,7 @@ class LRF_App(QtWidgets.QMainWindow, form_LRF.Ui_MainWindow):
             "H_tgt": (int(self.spinBox_H_tgt.text()), self.label_H_tgt.text()),
             "r_tgt": (float(self.doubleSpinBox_r_tgt.text().replace(',', '.')), self.label_r_tgt.text()),
             "angle_tgt": (int(self.spinBox_angle_tgt.text()), self.label_angle_tgt.text()),
-            "type_tgt": ("air_tgt" if self.radioButton_air_tgt
+            "type_tgt": ("air_tgt" if self.radioButton_air_tgt.isChecked()
                          else "earth_tgt", self.label_type_tgt.text()),
             # параметры приемника
             "D_pld": (float(self.doubleSpinBox_D_pld.text().replace(',', '.')), self.label_D_pld.text()),
@@ -56,15 +56,16 @@ class LRF_App(QtWidgets.QMainWindow, form_LRF.Ui_MainWindow):
         while max_rang - min_rang > step_rang:
             mid_rang = (max_rang + min_rang) // 2
             k_atm_trans = atm_trans.calculation_transmission(mid_rang)
-            #self.input_data["k_atm"] = (k_atm_trans, "Коэффициент пропускания атмосферы")
             snr_cur = snr.calculation_SNR(mid_rang, k_atm_trans)
             if snr_cur > self.input_data["SNR"][0]:
                 min_rang = mid_rang + step_rang
             else:
                 max_rang = mid_rang - step_rang
+        res_range = round(min_rang / 1000, 2)
+        self.label.setText(str(res_range))
 
-        self.label.setText(str(round(min_rang / 1000, 1)))
-
+        self.input_data["k_atm"] = (k_atm_trans, "Коэффициент пропускания атмосферы")
+        self.input_data["range"] = (res_range, "Дальность работы дальномера, км")
 
 def main():
     """"Инициализация класса"""

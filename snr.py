@@ -14,6 +14,7 @@ class SNR():
         self.r_tgt = data["r_tgt"][0]
         self.angle_tgt = math.radians(data["angle_tgt"][0])
         self.S_tgt = data["area_tgt"][0]
+        self.type_tgt = data["type_tgt"][0]
 
         self.D_pld = data["D_pld"][0] * (10**-3)
         self.fi_pld = math.radians(data["fi_pld"][0] / 60)
@@ -23,9 +24,14 @@ class SNR():
 
     def calc_P_tgt(self, rang, k_atm):
         """Расчет мощности отраженной от цели на приемнике"""
-        E_las = self.P_las * k_atm / (math.pi / 4 * (self.fi_las**2) * (rang**2))
-        I_tgt = E_las / math.pi * self.r_tgt * self.S_tgt * math.cos(self.angle_tgt)
-        P_tgt = I_tgt * (math.pi / 4 * self.D_pld**2) * self.tau_pld * k_atm / (rang**2)
+        if self.type_tgt == "air_tgt":
+            E_las = self.P_las * k_atm / (math.pi / 4 * (self.fi_las**2) * (rang**2))
+            I_tgt = E_las / math.pi * self.r_tgt * self.S_tgt * math.cos(self.angle_tgt)
+            P_tgt = I_tgt * (math.pi / 4 * self.D_pld**2) * self.tau_pld * k_atm / (rang**2)
+        else:
+            E_las = self.P_las * k_atm / (math.pi / 4 * (self.fi_las ** 2) * (rang ** 2))
+            I_tgt = E_las / math.pi * self.r_tgt * self.S_tgt * math.cos(self.angle_tgt)
+            P_tgt = I_tgt * (math.pi / 4 * self.D_pld ** 2) * self.tau_pld * k_atm / (rang**2)
         return P_tgt
 
     def calculation_SNR(self, rang, k_atm):
