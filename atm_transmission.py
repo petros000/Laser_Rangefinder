@@ -4,7 +4,7 @@ import math
 class AtmospTrans():
     """Класс для расчета коэффициента пропускания атмосферы"""
 
-    def __init__(self, data, range):
+    def __init__(self, data):
         self.mdv = data["mdv"][0]       # мдв, км
         self.tmp = data["tmp"][0]       # температура, С
         self.hum = data["hum"][0]       # влажность, %
@@ -12,7 +12,7 @@ class AtmospTrans():
         self.h_tgt = data["H_tgt"][0]   # высота цели, м
         self.h_ld = data["H_pld"][0]     # высота ЛД, м
         self.lmd = data["lmd_las"][0]       # длина волны, нм
-        self.range = range              # дальность, м
+        #self.range = range              # дальность, м
         self.del_h = 100                # шаг расчетов по высоте для наклонной трассы, м
 
     def func_tmp_for_h(self, h):
@@ -48,16 +48,16 @@ class AtmospTrans():
         alp = (3.9 / self.mdv) * ((0.55 / (self.lmd * 10**-3)) ** k_mdv) * math.exp(- (h * 10**-3) / k_h) * 10**-3
         return alp
 
-    def calc_aerosol_scattering(self):
+    def calc_aerosol_scattering(self, rang):
         """Вовзращает коэффициент пропускания за счет аэрозольного рассеяния"""
         del_h_tgt_ld = abs(self.h_tgt - self.h_ld)
         if del_h_tgt_ld == 0:
             alp = self.alp_aerosol_scattering(self.h_tgt)
-            tau = math.exp(- alp * self.range)
+            tau = math.exp(- alp * rang)
         else:
             tau = 1
             n_h = del_h_tgt_ld // self.del_h
-            r_h = self.range // n_h
+            r_h = rang // n_h
             for i in range(n_h):
                 alp = self.alp_aerosol_scattering(i * self.del_h + min(self.h_tgt, self.h_ld))
                 tau = tau * math.exp(- alp * r_h)
@@ -70,22 +70,22 @@ class AtmospTrans():
         betta = 1.09 * (10**-3) * press_h * (self.tmp + 273) / tmp_h / self.press * ((self.lmd * (10**-3)) ** -4) * (10 ** -3)
         return betta
 
-    def calc_molecul_scattering(self):
+    def calc_molecul_scattering(self, rang):
         """Вовзращает коэффициент пропускания за счет молекулярного рассеяния"""
         del_h_tgt_ld = abs(self.h_tgt - self.h_ld)
         if del_h_tgt_ld == 0:
             betta = self.betta_molecul_scattering(self.h_tgt)
-            tau = math.exp(- betta * self.range)
+            tau = math.exp(- betta * rang)
         else:
             tau = 1
             n_h = del_h_tgt_ld // self.del_h
-            r_h = self.range // n_h
+            r_h = rang // n_h
             for i in range(n_h):
                 betta = self.betta_molecul_scattering(i * self.del_h + min(self.h_tgt, self.h_ld))
                 tau = tau * math.exp(- betta * r_h)
         return round(tau, 4)
 
-    def calculation_transmission(self):
-        res = self.calc_aerosol_scattering() * self.calc_molecul_scattering()
+    def calculation_transmission(self, rang):
+        res = self.calc_aerosol_scattering(rang) * self.calc_molecul_scattering(rang)
         return round(res, 4)
 

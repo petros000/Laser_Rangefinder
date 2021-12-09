@@ -48,13 +48,22 @@ class LRF_App(QtWidgets.QMainWindow, form_LRF.Ui_MainWindow):
         """Запуск расчета"""
         # Создание словаря входных данных
         self.create_input_data()
-        atm_trans = AtmospTrans(self.input_data, 24100)
-        k_atm_trans = atm_trans.calculation_transmission()
-        self.input_data["k_atm"] = (k_atm_trans, "Коэффициент пропускания атмосферы")
-        print(self.input_data)
-        snr = SNR(self.input_data, 24100)
-        a = snr.calculation_SNR()
-        self.label.setText(str(a))
+        atm_trans = AtmospTrans(self.input_data)
+        snr = SNR(self.input_data)
+        max_rang = 100000
+        min_rang = 0
+        step_rang = 10
+        while max_rang - min_rang > step_rang:
+            mid_rang = (max_rang + min_rang) // 2
+            k_atm_trans = atm_trans.calculation_transmission(mid_rang)
+            #self.input_data["k_atm"] = (k_atm_trans, "Коэффициент пропускания атмосферы")
+            snr_cur = snr.calculation_SNR(mid_rang, k_atm_trans)
+            if snr_cur > self.input_data["SNR"][0]:
+                min_rang = mid_rang + step_rang
+            else:
+                max_rang = mid_rang - step_rang
+
+        self.label.setText(str(round(min_rang / 1000, 1)))
 
 
 def main():

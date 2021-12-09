@@ -3,12 +3,12 @@ import math
 class SNR():
     """Класс для расчета SNR"""
 
-    def __init__(self, data, range):
+    def __init__(self, data):
         self.fi_las = math.radians(data["fi_las"][0] / 60)
         self.tau_las = data["tau_las"][0]
         self.P_las = data["W_las"][0] * (10**-3) / (data["t_las"][0] * (10**-9)) * self.tau_las
 
-        self.k_atm = data["k_atm"][0]
+        #self.k_atm = data["k_atm"][0]
         self.range = range
 
         self.r_tgt = data["r_tgt"][0]
@@ -21,16 +21,16 @@ class SNR():
         self.tau_pld = data["tau_pld"][0]
         self.Pdark_pld = data["Pdark_pld"][0] * (10**-9)
 
-    def calc_P_tgt(self):
+    def calc_P_tgt(self, rang, k_atm):
         """Расчет мощности отраженной от цели на приемнике"""
-        E_las = self.P_las * self.k_atm / (math.pi / 4 * (self.fi_las**2) * (self.range**2))
+        E_las = self.P_las * k_atm / (math.pi / 4 * (self.fi_las**2) * (rang**2))
         I_tgt = E_las / math.pi * self.r_tgt * self.S_tgt * math.cos(self.angle_tgt)
-        P_tgt = I_tgt * (math.pi / 4 * self.D_pld**2) * self.tau_pld * self.k_atm / (self.range**2)
+        P_tgt = I_tgt * (math.pi / 4 * self.D_pld**2) * self.tau_pld * k_atm / (rang**2)
         return P_tgt
 
-    def calculation_SNR(self):
+    def calculation_SNR(self, rang, k_atm):
         """Расчет SNR"""
-        i_dark_pld = self.S_pld * self.Pdark_pld
-        i_p_tgt = self.calc_P_tgt() * self.S_pld
+        i_dark_pld = 0.6 * self.Pdark_pld
+        i_p_tgt = self.calc_P_tgt(rang, k_atm) * self.S_pld
         snr = i_p_tgt / i_dark_pld
         return round(snr, 2)
