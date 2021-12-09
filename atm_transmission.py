@@ -17,12 +17,12 @@ class AtmospTrans():
 
     def func_tmp_for_h(self, h):
         """Возвращает температуру воздуха на разной высоте"""
-        tmp_h = round(self.tmp + 273 - 0.0065 * h, 3)
+        tmp_h = round(self.tmp + 273 - 0.0065 * h, 4)
         return tmp_h
 
     def func_pres_for_h(self, h):
         """Возвращает давление воздуха на разной высоте"""
-        press_h = round(self.press * ((1 - (h/44308)) ** 5.255), 3)
+        press_h = round(self.press * ((1 - (h/44308)) ** 5.255), 4)
         return press_h
 
     def calc_k_mdv(self):
@@ -34,7 +34,7 @@ class AtmospTrans():
             k = 1.3
         elif self.mdv > 20:
             k = 1.5
-        return round(k, 3)
+        return round(k, 4)
 
     def calc_k_h(self):
         """Поправочный коэффициент для МДВ от высоты"""
@@ -61,7 +61,7 @@ class AtmospTrans():
             for i in range(n_h):
                 alp = self.alp_aerosol_scattering(i * self.del_h + min(self.h_tgt, self.h_ld))
                 tau = tau * math.exp(- alp * r_h)
-        return round(tau, 3)
+        return round(tau, 4)
 
     def betta_molecul_scattering(self, h):
         """Вовзращает показатель молекулярного ослабления"""
@@ -83,9 +83,9 @@ class AtmospTrans():
             for i in range(n_h):
                 betta = self.betta_molecul_scattering(i * self.del_h + min(self.h_tgt, self.h_ld))
                 tau = tau * math.exp(- betta * r_h)
-        return round(tau, 3)
+        return round(tau, 4)
 
     def calculation_transmission(self):
-        res = self.calc_aerosol_scattering() * self.calc_aerosol_scattering()
-        return round(res, 3)
+        res = self.calc_aerosol_scattering() * self.calc_molecul_scattering()
+        return round(res, 4)
 
