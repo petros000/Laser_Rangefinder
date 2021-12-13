@@ -29,8 +29,12 @@ class SNR():
             I_tgt = E_las / math.pi * self.r_tgt * self.S_tgt * math.cos(self.angle_tgt)
             P_tgt = I_tgt * (math.pi / 4 * self.D_pld**2) * self.tau_pld * k_atm / (rang**2)
         else:
-            E_las = self.P_las * k_atm / (math.pi / 4 * (self.fi_las ** 2) * (rang ** 2))
-            I_tgt = E_las / math.pi * self.r_tgt * self.S_tgt * math.cos(self.angle_tgt)
+            S_las = math.pi / 4 * (self.fi_las ** 2) * (rang ** 2)
+            E_las = self.P_las * k_atm / S_las
+            if S_las >= self.S_tgt:
+                I_tgt = E_las / math.pi * self.r_tgt * self.S_tgt * math.cos(self.angle_tgt)
+            else:
+                I_tgt = E_las / math.pi * self.r_tgt * S_las * math.cos(self.angle_tgt)
             P_tgt = I_tgt * (math.pi / 4 * self.D_pld ** 2) * self.tau_pld * k_atm / (rang**2)
         return P_tgt
 

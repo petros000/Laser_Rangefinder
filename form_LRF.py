@@ -173,7 +173,7 @@ class Ui_MainWindow(object):
         self.doubleSpinBox_area_tgt.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.doubleSpinBox_area_tgt.setDecimals(3)
         self.doubleSpinBox_area_tgt.setMinimum(0.001)
-        self.doubleSpinBox_area_tgt.setMaximum(200.0)
+        self.doubleSpinBox_area_tgt.setMaximum(2000.0)
         self.doubleSpinBox_area_tgt.setProperty("value", 0.25)
         self.doubleSpinBox_area_tgt.setObjectName("doubleSpinBox_area_tgt")
         self.label_H_tgt = QtWidgets.QLabel(self.groupBox_tgt)

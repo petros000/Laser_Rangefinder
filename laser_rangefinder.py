@@ -50,7 +50,7 @@ class LRF_App(QtWidgets.QMainWindow, form_LRF.Ui_MainWindow):
         self.create_input_data()
         atm_trans = AtmospTrans(self.input_data)
         snr = SNR(self.input_data)
-        max_rang = 100000
+        max_rang = 200000
         min_rang = 0
         step_rang = 10
         while max_rang - min_rang > step_rang:
