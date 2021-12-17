@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>630</width>
-    <height>610</height>
+    <width>636</width>
+    <height>597</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -65,7 +65,7 @@
       <number>-50</number>
      </property>
      <property name="maximum">
-      <number>60</number>
+      <number>50</number>
      </property>
      <property name="value">
       <number>21</number>
@@ -1142,58 +1142,6 @@
       <string>Длина волны, нм</string>
      </property>
     </widget>
-    <widget class="QSpinBox" name="spinBox_lmd_las">
-     <property name="geometry">
-      <rect>
-       <x>190</x>
-       <y>30</y>
-       <width>70</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <weight>50</weight>
-       <bold>false</bold>
-      </font>
-     </property>
-     <property name="layoutDirection">
-      <enum>Qt::LeftToRight</enum>
-     </property>
-     <property name="autoFillBackground">
-      <bool>false</bool>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-     </property>
-     <property name="buttonSymbols">
-      <enum>QAbstractSpinBox::UpDownArrows</enum>
-     </property>
-     <property name="specialValueText">
-      <string/>
-     </property>
-     <property name="minimum">
-      <number>500</number>
-     </property>
-     <property name="maximum">
-      <number>1800</number>
-     </property>
-     <property name="singleStep">
-      <number>10</number>
-     </property>
-     <property name="value">
-      <number>1064</number>
-     </property>
-     <property name="displayIntegerBase">
-      <number>10</number>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_fi_las">
      <property name="geometry">
       <rect>
@@ -1448,6 +1396,32 @@
       <double>0.500000000000000</double>
      </property>
     </widget>
+    <widget class="QComboBox" name="comboBox_lmd_las">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>30</y>
+       <width>61</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <item>
+      <property name="text">
+       <string>1064</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1550</string>
+      </property>
+     </item>
+    </widget>
    </widget>
    <widget class="QPushButton" name="pushButton_start">
     <property name="geometry">
@@ -1526,7 +1500,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>630</width>
+     <width>636</width>
      <height>21</height>
     </rect>
    </property>

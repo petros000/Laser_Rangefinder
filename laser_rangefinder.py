@@ -37,7 +37,7 @@ class LRF_App(QtWidgets.QMainWindow, form_LRF.Ui_MainWindow):
             "tau_pld": (float(self.doubleSpinBox_tau_pld.text().replace(',', '.')), self.label_tau_pld.text()),
             "SNR": (float(self.doubleSpinBox_SNR.text().replace(',', '.')), self.label_SNR.text()),
             # параметры лазера
-            "lmd_las": (int(self.spinBox_lmd_las.text()), self.label_lmd_las.text()),
+            "lmd_las": (float(self.comboBox_lmd_las.currentText().replace(',', '.')), self.label_lmd_las.text()),
             "fi_las": (float(self.doubleSpinBox_fi_las.text().replace(',', '.')), self.label_fi_las.text()),
             "t_las": (int(self.spinBox_t_las.text()), self.label_t_las.text()),
             "W_las": (float(self.doubleSpinBox_W_las.text().replace(',', '.')), self.label_W_las.text()),
